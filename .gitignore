@@ -1,0 +1,42 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Environment files
+.env
+.env.* 
+
+# Build output
+dist/
+dist-ssr/
+out/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE configs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Lock files (optional, ignore if you don't want to track them)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# TypeScript and Vite configs (❌ ignore if you don't want to commit them)
+vite.config.ts
+tsconfig.json
+tsconfig.*.json
