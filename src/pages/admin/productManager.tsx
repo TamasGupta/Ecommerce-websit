@@ -157,7 +157,7 @@ const ProductManager = () => {
     setValue("category", product.category);
     setValue("description", product.description);
     setValue("image", product.images[0]);
-    setValue("tags", product.tags || []); // ✅ Sync tags with form state
+    setValue("tags", product.tags || []); 
     setSelectedTags(
       product.tags?.map((tag) => ({ label: tag, value: tag })) || []
     );
