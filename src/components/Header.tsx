@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Search, ShoppingBag, User, Menu, X } from 'lucide-react';
-import { useCart } from '../contexts/CartContext';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Search, ShoppingBag, User, Menu, X } from "lucide-react";
+import { useCart } from "../contexts/CartContext";
+import { useAuth } from "../contexts/AuthContext";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const { itemCount } = useCart();
   const { user, logout } = useAuth();
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle search
-    console.log('Search:', searchQuery);
+    console.log("Search:", searchQuery);
   };
 
   return (
@@ -30,18 +30,46 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <Link to="/" className="text-gray-700 hover:text-rose-600 transition-colors">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `${
+                  isActive ? "text-rose-600" : "text-gray-700"
+                } hover:text-rose-600 transition-colors`
+              }
+            >
               Home
-            </Link>
-            <Link to="/products" className="text-gray-700 hover:text-rose-600 transition-colors">
+            </NavLink>
+            <NavLink
+              to="/products"
+              className={({ isActive }) =>
+                `${
+                  isActive ? "text-rose-600" : "text-gray-700"
+                } hover:text-rose-600 transition-colors`
+              }
+            >
               Products
-            </Link>
-            <Link to="/about" className="text-gray-700 hover:text-rose-600 transition-colors">
+            </NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `${
+                  isActive ? "text-rose-600" : "text-gray-700"
+                } hover:text-rose-600 transition-colors`
+              }
+            >
               About
-            </Link>
-            <Link to="/contact" className="text-gray-700 hover:text-rose-600 transition-colors">
+            </NavLink>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `${
+                  isActive ? "text-rose-600" : "text-gray-700"
+                } hover:text-rose-600 transition-colors`
+              }
+            >
               Contact
-            </Link>
+            </NavLink>
           </nav>
 
           {/* Search Bar */}
@@ -70,10 +98,16 @@ const Header: React.FC = () => {
                 </button>
                 <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="py-1">
-                    <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-50"
+                    >
                       Profile
                     </Link>
-                    <Link to="/orders" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">
+                    <Link
+                      to="/orders"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-50"
+                    >
                       Orders
                     </Link>
                     <button
@@ -86,12 +120,18 @@ const Header: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <Link to="/login" className="text-gray-700 hover:text-rose-600 transition-colors">
+              <Link
+                to="/login"
+                className="text-gray-700 hover:text-rose-600 transition-colors"
+              >
                 <User className="w-5 h-5" />
               </Link>
             )}
 
-            <Link to="/cart" className="relative text-gray-700 hover:text-rose-600 transition-colors">
+            <Link
+              to="/cart"
+              className="relative text-gray-700 hover:text-rose-600 transition-colors"
+            >
               <ShoppingBag className="w-5 h-5" />
               {itemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-rose-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -105,7 +145,11 @@ const Header: React.FC = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden text-gray-700 hover:text-rose-600 transition-colors"
             >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
         </div>
@@ -126,16 +170,28 @@ const Header: React.FC = () => {
                   />
                 </div>
               </form>
-              <Link to="/" className="text-gray-700 hover:text-rose-600 transition-colors">
+              <Link
+                to="/"
+                className="text-gray-700 hover:text-rose-600 transition-colors"
+              >
                 Home
               </Link>
-              <Link to="/products" className="text-gray-700 hover:text-rose-600 transition-colors">
+              <Link
+                to="/products"
+                className="text-gray-700 hover:text-rose-600 transition-colors"
+              >
                 Products
               </Link>
-              <Link to="/about" className="text-gray-700 hover:text-rose-600 transition-colors">
+              <Link
+                to="/about"
+                className="text-gray-700 hover:text-rose-600 transition-colors"
+              >
                 About
               </Link>
-              <Link to="/contact" className="text-gray-700 hover:text-rose-600 transition-colors">
+              <Link
+                to="/contact"
+                className="text-gray-700 hover:text-rose-600 transition-colors"
+              >
                 Contact
               </Link>
             </div>

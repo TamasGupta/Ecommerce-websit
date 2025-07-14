@@ -73,8 +73,8 @@ const ProductManager = () => {
     resolver: zodResolver(productSchema),
     defaultValues: {
       name: "",
-      price: "0",
-      stock: "0",
+      price: "",
+      stock: "",
       category: "",
       description: "",
       image: "",
@@ -157,7 +157,7 @@ const ProductManager = () => {
     setValue("category", product.category);
     setValue("description", product.description);
     setValue("image", product.images[0]);
-    setValue("tags", product.tags || []); 
+    setValue("tags", product.tags || []);
     setSelectedTags(
       product.tags?.map((tag) => ({ label: tag, value: tag })) || []
     );

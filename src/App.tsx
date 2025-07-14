@@ -13,6 +13,8 @@ import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/protectedRoute";
 import AdminDashboard from "./pages/admin/adminDashboard";
+import UserProfile from "./pages/user/userProfile";
+import EditProfile from "./pages/user/editUserProfile";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/profile" element={<UserProfile />} />
+                <Route path="/profile/edit" element={<EditProfile />} />
                 <Route
                   path="/admin"
                   element={
