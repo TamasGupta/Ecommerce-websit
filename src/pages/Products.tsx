@@ -23,7 +23,7 @@ const Products: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Fetch products on mount
+ 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
