@@ -22,7 +22,7 @@
 }
 
 /* Remove arrows */
-/* Stronger scrollbar button removal */
+
 ::-webkit-scrollbar-button {
   height: 0;
   width: 0;
