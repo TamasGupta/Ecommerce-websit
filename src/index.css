@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Applies to entire app */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #ff6a00, #ee0979);
+}
+
+/* Remove arrows */
+/* Stronger scrollbar button removal */
+::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
+  display: none;
+  background: none;
+    appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #e85ebe transparent;
+}

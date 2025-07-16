@@ -14,7 +14,6 @@ interface AuthContextType {
   signup: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
-  
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -59,8 +58,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
+    console.log("savedUser", savedUser);
+
+    try {
+      if (savedUser) {
+        const parsed = JSON.parse(savedUser);
+        console.log("parsedUser", parsed);
+        setUser(parsed);
+      }
+    } catch (err) {
+      console.error("Failed to parse user from localStorage", err);
     }
   }, []);
 

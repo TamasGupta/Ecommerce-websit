@@ -8,27 +8,28 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (token) {
-      getUserProfile(token)
-        .then((data) => {
-          setForm({
-            name: data.name,
-            email: data.email,
-            phone: data.phone || "",
-            avatar: data.avatar || "",
-            password: "",
-            address: data.address || {
-              street: "",
-              city: "",
-              state: "",
-              zip: "",
-            },
-          });
-        })
-        .catch(() => setMessage("Failed to load profile"));
+  const fetchUser = async () => {
+    const res = await getUserProfile();
+    console.log(res);
+    if (res.status == 200) {
+      setForm({
+        name: res.data.name,
+        email: res.data.email,
+        phone: res.data.phone || "",
+        avatar: res.data.avatar || "",
+        address: res.data.address || {
+          street: "",
+          city: "",
+          state: "",
+          zip: "",
+        },
+      });
     }
-  }, [token]);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -55,7 +56,7 @@ const EditProfile = () => {
     if (!token) return;
 
     try {
-      await updateUserProfile(token, form);
+      await updateUserProfile(form);
       setMessage("Profile updated successfully!");
       setTimeout(() => navigate("/profile"), 1000);
     } catch {
@@ -95,14 +96,6 @@ const EditProfile = () => {
           value={form.avatar || ""}
           onChange={handleChange}
           placeholder="Avatar URL"
-          className="w-full border p-2 rounded"
-        />
-        <input
-          name="password"
-          type="password"
-          value={form.password || ""}
-          onChange={handleChange}
-          placeholder="New Password"
           className="w-full border p-2 rounded"
         />
 

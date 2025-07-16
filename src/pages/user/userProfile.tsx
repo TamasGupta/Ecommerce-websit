@@ -28,12 +28,14 @@ interface User {
 const UserProfile: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const data = await getUserProfile(token);
-        setUser(data);
+        const res = await getUserProfile();
+        if (res.status == 200) {
+          setUser(res.data);
+        }
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
         // navigate("/login");
@@ -41,35 +43,36 @@ const UserProfile: React.FC = () => {
     };
 
     fetchUser();
-  }, [navigate]);
+  }, []);
 
   const handleLogout = async () => {
     await logoutUser();
     navigate("/login");
   };
 
-  if (user) return (
-    <div className="p-5">
-      <Shimmer.ProductCard />
-    </div>
-  );
+  if (!user)
+    return (
+      <div className="p-5">
+        <Shimmer.Profile />
+      </div>
+    );
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-semibold mb-6">Your Profile</h1>
+      <h1 className="text-3xl font-semibold mb-6">Hii! {user?.name}</h1>
 
       {/* User Info */}
       <div className="bg-white shadow rounded-lg p-6 mb-6">
         <div className="flex items-center space-x-6">
           <img
-            src={user.avatar || "/default-avatar.png"}
+            src={user?.avatar || "/default-avatar.png"}
             alt="Profile"
             className="w-24 h-24 rounded-full object-cover border"
           />
           <div>
-            <h2 className="text-xl font-semibold">{user.name}</h2>
-            <p className="text-gray-600">{user.email}</p>
-            {user.phone && <p className="text-gray-600">{user.phone}</p>}
+            <h2 className="text-xl font-semibold">{user?.name}</h2>
+            <p className="text-gray-600 text-sm">{user?.email}</p>
+            {user?.phone && <p className="text-gray-600">{user?.phone}</p>}
             <button
               onClick={() => navigate("/profile/edit")}
               className="mt-2 text-sm text-blue-600 hover:underline"
@@ -83,9 +86,9 @@ const UserProfile: React.FC = () => {
       {/* Address */}
       <div className="bg-white shadow rounded-lg p-6 mb-6">
         <h3 className="text-lg font-medium mb-2">Shipping Address</h3>
-        {user.address ? (
+        {user?.address ? (
           <p className="text-gray-700">
-            {user.address.street}, {user.address.city}, {user.address.state},{" "}
+            {user.address?.street}, {user.address.city}, {user.address.state},{" "}
             {user.address.zip}
           </p>
         ) : (
